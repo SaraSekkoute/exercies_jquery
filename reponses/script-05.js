@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     function format(number) {
         // Convertir le nombre en une chaîne de caractères
         var formattedNumber = number.toFixed(2).toString();

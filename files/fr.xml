@@ -1,0 +1,13 @@
+<departements>
+  <fr>
+    <dep>Paris</dep>
+    <ville>Paris</ville>
+  </fr>
+    <fr>
+    <dep>Rabat-Salé-Kénitra</dep>
+    <ville>Rabat</ville>
+    <ville>Salé</ville>
+    <ville>Kénitra</ville>
+  </fr>
+
+</departements>

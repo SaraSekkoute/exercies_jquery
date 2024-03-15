@@ -1,40 +1,36 @@
-$(document).ready(function () {
-    var textarea1 = document.getElementById('f1');
-    var output1 = document.getElementById('out');
-
-    // Attacher un gestionnaire d'événements keypress à la zone de texte #f1
-    textarea1.addEventListener('keypress', function(event) {
-        // Code à exécuter lorsque l'événement keypress est déclenché
-        console.log('Touche pressée : ' + event.key );
-        var charCode = event.charCode || event.keyCode; // Utiliser event.keyCode pour la compatibilité avec certains navigateurs
+$(document).ready(function() {
+    // Attacher un événement keypress à #f1
+    $('#f1').on('keypress', function(event) {
+        // Analyse de l'objet Event dans la console
+        console.log(event);
         
-        // Filtre pour ne garder que les chiffres
-        if (charCode >= 48 && charCode <= 57) {
-            var charStr = String.fromCharCode(charCode);
-            output1.textContent += charStr;
-        }
+        //L'attribut charCode de l'objet Event permet de récupérer le code du caractère. Faire en sorte que la div#out recopie le contenu de de #f1
+        var charCode = event.charCode || event.keyCode;
+        
+       // Si le caractère est un chiffre
+       if (charCode >= 48 && charCode <= 57) {
+        // Ajouter le chiffre à #out
+        var chiffre = String.fromCharCode(charCode);
+        var texteFiltre = $('#f1').val().replace(/\D/g, '') + chiffre;
+        $('#out').text(texteFiltre);
+    }
     });
 
-    var textarea2 = document.getElementById('f2');
-    var output2 = document.getElementById('out');
-
-    // Créer une variable pour stocker les caractères saisis dans #f2
-    var characters = "";
-
-    // Attacher un gestionnaire d'événements keypress à la zone de texte #f2
-    textarea2.addEventListener('keypress', function(event) {
-        // Code à exécuter lorsque l'événement keypress est déclenché
-        console.log('Touche pressée : ' + event.key );
-        var charCode = event.charCode || event.keyCode; // Utiliser event.keyCode pour la compatibilité avec certains navigateurs
+    // Attacher un événement keypress à #f2
+    $('#f2').on('keypress', function(event) {
+        // Récupérer le code du caractère
+        var charCode = event.charCode || event.keyCode;
         
-        // Filtre pour ne garder que les chiffres
+        // Si le caractère est un chiffre
         if (charCode >= 48 && charCode <= 57) {
-            var charStr = String.fromCharCode(charCode);
-            characters += charStr;
-            if (characters.length >= 3) {
-                // Recopier les trois derniers caractères dans la div#out
-                output2.textContent += characters.slice(-3);
-                characters = ""; // Réinitialiser la variable characters
+            // Ajouter le chiffre à une chaîne temporaire
+            var chiffre = String.fromCharCode(charCode);
+            var temp =  $('#f2').val().replace(/\D/g, '') + chiffre;
+            
+            // Si la longueur de la chaîne est un multiple de 3
+            if (temp.length % 3 == 0) {
+                // Ajouter les trois derniers chiffres à #out
+                $('#out').text( temp.slice(-3));
             }
         }
     });
